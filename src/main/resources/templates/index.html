@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>HelloSpring</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+
+        <h1>Hello World</h1>
+        <a th:href="@{/add}">Create Person</a>
+        <br/>
+        <br/>
+        <div th:if="${peop != null and !peop.empty}">
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="person : ${peop}">
+                    <td th:text = "${person.name}"></td>
+                    <td th:text = "${person.lastname}"></td>
+                    <td th:text = "${person.email}"></td>
+                    <td th:text = "${person.phone}"></td>
+                    <td> <a th:href="@{/edit/} + ${person.id_person}" th:text="Edit"></a></td>
+                    <td> <a th:href="@{/delete(id_person=${person.id_person})}" th:text="Delete"></a></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${peop == null or peop.empty}">
+            People list is empty!!
+        </div>
+    </body>
+</html>
